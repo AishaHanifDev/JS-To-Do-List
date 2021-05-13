@@ -10,13 +10,15 @@
   <div class="Wrapper">
     <div id="myDIV" class="header">
    	 <h1 class="heading">" My To Do List... "<h1>
-      <input type="text" id="myInput" placeholder="Title ...">
+      <input type="text1" id="myInput" placeholder="Title ...">
     <span onclick="newElement()" class="addBtn">Add</span>
 </div>
    <ul id="myUL">
-    <li>Hit the gym</li>
-     <li class="checked">Pay bills</li>
-      <li>Read a book</li>
+    <form class="js-form">
+    <li><label><input autofocus type="text" value="Hit the gym"></label></li>
+     <li class="checked"><label><input type="text" value="Pay bills" class="js-todo-input"></label></li>
+      <li><label><input type="text" value="Read a book"></label></li>
+    </form>
       </ul>
     </div>
  </div>
@@ -27,6 +29,13 @@
               <!-- JAVASCRIPT START -->
  
  <script>
+ // for (var i = 0; i < howManyLi; i++) {
+ // if (liElements[i].innerHTML === "") {
+ // liElements[i].innerHTML = "coming soon";
+ // }
+ // }
+
+
  var myNodelist = document.getElementsByTagName("LI");
      var i;
  for (i = 0; i < myNodelist.length; i++) {
@@ -51,6 +60,19 @@ list.addEventListener('click', function(ev) {
     ev.target.classList.toggle('checked');
   }
 }, false);
+ 
+ const form = document.querySelector('.js-form');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const input = document.querySelector('.js-todo-input');
+
+  const text = input.value.trim();
+  if (text !== '') {
+    addTodo(text);
+    input.value = '';
+    input.focus();
+  }
+});
 
   
     function newElement() {
@@ -76,8 +98,11 @@ list.addEventListener('click', function(ev) {
       var div = this.parentElement;
       div.style.display = "none";
     }
-  }
 }
+}
+
+
+
   
 </script>
  </body>
